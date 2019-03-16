@@ -22,10 +22,10 @@ var commentRoutes    = require("./routes/comments"),
     indexRoutes      = require("./routes/index"),
     adminRoutes      = require("./routes/admin-routes")
     
-mongoose.connect("mongodb://localhost/test");
-// mongoose.connect('mongodb://sproutsnapdb:sproutsnapdb1@ds211613.mlab.com:11613/sproutsnap1', ()=>{
-//   console.log('connected to mongolab');
-// });
+// mongoose.connect("mongodb://localhost/test");
+mongoose.connect('mongodb://sproutsnapdb:sproutsnapdb1@ds211613.mlab.com:11613/sproutsnap1', ()=>{
+  console.log('connected to mongolab');
+});
 // mongoose.connect('mongodb://substraunt:substraunt1@ds125693.mlab.com:25693/substraunt', ()=>{
 // 	console.log('connected to mongolab');
 // });
