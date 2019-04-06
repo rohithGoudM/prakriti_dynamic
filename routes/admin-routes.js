@@ -10,7 +10,9 @@ var Customer = require("../models/customer-model");
 var Restaurant = require("../models/restaurant-model");
 var Menu_item = require("../models/menu-model");
 var Admin = require("../models/admin-model");
+var Upcoming_event = require("../models/upcoming_event-model");
 var Event = require("../models/event-model");
+var Project = require("../models/project-model");
 var upload = multer({ dest: 'public/uploads/' });
 
 const passport = require('passport');
@@ -28,6 +30,7 @@ const authCheck = (req, res, next)=>{
 
 //root route
 router.get("/", function(req, res){
+  console.log("admin");
   res.render("admin/adminsignin");
 
 });
@@ -73,9 +76,7 @@ router.post('/signin', passport.authenticate('local',{
   res.send('hey there!!!');
 });
 
-router.post('/addevent', upload.any(), (req, res)=>{
-
-console.log(req.files);
+router.post('/addupevent', upload.any(), (req, res)=>{
 
     req.files.forEach(function(file){
     var newEvent = {      
@@ -85,9 +86,39 @@ console.log(req.files);
       writeup: req.body.writeup
     }
     console.log(newEvent);
+    new Upcoming_event(newEvent).save(function(err, evnt){
+      console.log("evnt after save");
+    });
+
+    });
+    res.redirect('/profile/admin');
+});
+
+router.post('/addevent', upload.any(), (req, res)=>{
+    req.files.forEach(function(file){
+    var newEvent = {      
+      name: req.body.event_name,
+      picUrl: '/uploads/'+file.filename,
+      writeup: req.body.writeup
+    }
+    console.log(newEvent);
     new Event(newEvent).save(function(err, evnt){
       console.log("evnt after save");
-      console.log(evnt);
+    });
+
+    });
+    res.redirect('/profile/admin');
+});
+
+router.post('/addproject', upload.any(), (req, res)=>{
+    req.files.forEach(function(file){
+    var newProject = {      
+      name: req.body.event_name,
+      picUrl: '/uploads/'+file.filename,
+      writeup: req.body.writeup
+    }
+    new Project(newProject).save(function(err, evnt){
+      console.log("evnt after save");
     });
 
     });

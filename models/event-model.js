@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const eventSchema = new Schema({
 	name: String,
 	writeup: String,
-	picUrl: String,
-	date: Date
+	picUrl: String
 });
 
 const Event = mongoose.model('event', eventSchema);

@@ -152,21 +152,22 @@
 			<div class="col-lg-12 text-center">
 			<h2 class="section-heading">Upcoming events</h2>
 
-<%var i=0;events.forEach(function(event){ i++;%>
+<% if(up_events){ %>
+<%var i=0;up_events.forEach(function(event){ i++;%>
     <% if(i%2==1){ %>
              <h3 class="section-subheading text-muted"></h3>
              <div class="container">
-			 <div class="row">
-				<div class="col-lg-6">
-					<img src="<%=event.picUrl%>" style="height: 100%; width: 100%; object-fit: cover; float:middle;margin-left: auto;margin-right: auto;" >
+             <div class="row">
+                <div class="col-lg-6">
+                    <img src="<%=event.picUrl%>" style="height: 100%; width: 100%; object-fit: cover; float:middle;margin-left: auto;margin-right: auto;" >
 
-				 </div>
+                 </div>
 
-				 <div class="col-lg-6">
-					 <h2><%=event.name%></h2>
-				 	<p style="float:middle; margin:10%;  text-align: justify;"><%=event.writeup%></p>
-				 </div>
-		     </div>
+                 <div class="col-lg-6">
+                     <h2><%=event.name%></h2>
+                    <p style="float:middle; margin:10%;  text-align: justify;"><%=event.writeup%></p>
+                 </div>
+             </div>
             </div>
     <% }else{ %>
     
@@ -191,6 +192,7 @@
             </div>
 
 <% } }); %>
+<% } %>
 
 
 		
@@ -206,141 +208,30 @@
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/img21.jpg" class="img-responsive" alt="nothing to show"> <!--icon events-->
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Plantation</h4>
-                      </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/runit1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>RuNIT</h4>
+                <% var i=0; if(events){ %>
 
+                <%  events.forEach(function(event){ i++;%>
+
+                <% if(i%3==1){ %>
+                    <div class="row">
+                <% } %>
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <a href="/event/<%= event.name %>" class="portfolio-link" data-toggle="modal">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="<%= event.picUrl %>" class="img-responsive" alt="nothing to show"> <!--icon events-->
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4><%= event.name %></h4>
+                          </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/villagetrip1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Village Trip</h4>
-
+                <% }); if(i%3==0 || events.length == i ){%>
                     </div>
-                </div>
-			</div>
-			<div class="row">
-
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/envoice1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Envoice</h4>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/pp1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Nature Photography</h4>
-
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/earthhour1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Earth Hour</h4>
-
-                    </div>
-                </div>
-				</div>
-			<div class="row">
-								<div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/campus1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Roll Up Rags</h4>
-
-                    </div>
-                </div>
-
-				<div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/greend1.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Green Diwali</h4>
-
-                    </div>
-                </div>
-				<div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/thunt.jpg" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Treasure Hunt</h4>
-
-                    </div>
-                </div>
-
-            </div>
+                <% } %>
+                <% } %>
         </div>
     </section>
 
@@ -359,83 +250,34 @@
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#projectmodel1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/mini compostingll.jpg" class="img-responsive" alt=""> <!--icon events-->
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Mini Composting</h4>
-                      </div>
-                </div>
+                <% var i=0; if(projects){ %>
 
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#projectmodel2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/acqua.jpg" class="img-responsive" alt=""> <!--icon events-->
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Aquaponics</h4>
-                      </div>
-                </div>
-				<div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#projectmodel3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/Clay-Incinerators.jpg" class="img-responsive" alt=""> <!--icon events-->
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Clay Incinerator</h4>
-                      </div>
-                </div>
+                <%  projects.forEach(function(project){ i++;%>
 
-			</div>
-			<div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#projectmodel4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
+                <% if(i%3==1){ %>
+                    <div class="row">
+                <% } %>
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
                             </div>
-                        </div>
-                        <img src="/images/MiniWaterCooler.jpg" class="img-responsive" alt=""> <!--icon events-->
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Mini Water Cooler</h4>
-                      </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#projectmodel5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="/images/maxresdefault.jpg" class="img-responsive" alt=""> <!--icon events-->
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Candled Charger</h4>
-                      </div>
-                </div>
-
-
-			</div>
+                            <img src="<%= project.picUrl %>" class="img-responsive" alt="nothing to show"> <!--icon events-->
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4><%= project.name %></h4>
+                          </div>
+                    </div>
+                <% }); if(i%3==0 || projects.length == i ){%>
+                    </div>
+                <% } %>
+                <% } %>
 
 
             </div>
+
 
     </section>
 	</section>
@@ -495,7 +337,7 @@
                 </div>
             </div>
             <div class="row text-center" style="margin-left: auto; margin-right: auto;">
-                <div class="col-md-2 col-sm-12 col-xs-12">
+                <div class="col-md-2 col-sm-12 col-xs-12 col-md-offset-1">
                     <div class="team-member">
                         <img src="/images/piyushubham.jpg" class="img-responsive img-circle" alt="">
                         <h4>Piyush Kumar</h4>
