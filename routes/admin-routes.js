@@ -30,7 +30,6 @@ const authCheck = (req, res, next)=>{
 
 //root route
 router.get("/", function(req, res){
-  console.log("admin");
   res.render("admin/adminsignin");
 
 });
@@ -44,7 +43,6 @@ router.post("/signup",  function(req, res){
   if(req.body.adminCode == "peephole"){
 
   Admin.findOne({username: req.body.user_name}, function(err, doc){
-    console.log(doc);
     if(doc){
       res.redirect("/admin");
     }else{
@@ -56,7 +54,6 @@ router.post("/signup",  function(req, res){
         if(error){
           res.send('db error');
         }else{
-          console.log("no err in record.save");
         res.redirect('/profile/admin');
         }
       });
@@ -76,6 +73,52 @@ router.post('/signin', passport.authenticate('local',{
   res.send('hey there!!!');
 });
 
+
+router.get('/events',function(req, res){
+  Event.find({},function(err, events){
+    res.render('admin/events', {events: events});
+  })
+});
+
+router.get('/projects',function(req, res){
+  Project.find({},function(err, projects){
+    res.render('admin/projects', {projects: projects});
+  })
+});
+
+router.get('/upcoming_events',function(req, res){
+  Upcoming_event.find({},function(err, upevents){
+    res.render('admin/upcoming_events', {events: upevents});
+  })
+});
+
+router.get('/delete_event/:event_name',function(req, res){
+  Event.deleteOne({name: req.params.event_name}, function(err){
+    if(err){
+      console.log(err);
+    }
+    res.redirect('/admin/events');
+  });
+});
+
+router.get('/delete_project/:event_name',function(req, res){
+  Project.deleteOne({name: req.params.event_name}, function(err){
+    if(err){
+      console.log(err);
+    }
+    res.redirect('/admin/projects');
+  });
+});
+
+router.get('/delete_upevent/:date',function(req, res){
+  Upcoming_event.deleteOne({date: req.params.date}, function(err){
+    if(err){
+      console.log(err);
+    }
+    res.redirect('/admin/upcoming_events');
+  });
+});
+
 router.post('/addupevent', upload.any(), (req, res)=>{
 
     req.files.forEach(function(file){
@@ -85,9 +128,7 @@ router.post('/addupevent', upload.any(), (req, res)=>{
       date: req.body.date,
       writeup: req.body.writeup
     }
-    console.log(newEvent);
     new Upcoming_event(newEvent).save(function(err, evnt){
-      console.log("evnt after save");
     });
 
     });
@@ -101,9 +142,7 @@ router.post('/addevent', upload.any(), (req, res)=>{
       picUrl: '/uploads/'+file.filename,
       writeup: req.body.writeup
     }
-    console.log(newEvent);
     new Event(newEvent).save(function(err, evnt){
-      console.log("evnt after save");
     });
 
     });
@@ -118,12 +157,27 @@ router.post('/addproject', upload.any(), (req, res)=>{
       writeup: req.body.writeup
     }
     new Project(newProject).save(function(err, evnt){
-      console.log("evnt after save");
     });
 
     });
     res.redirect('/profile/admin');
 });
 
+router.post('/add_details/:date',upload.any(), function(req, res){
+  Upcoming_event.findOne({date: req.params.date}, function(err, upevent){
+    upevent.fblink = req.body.fblink;
+    upevent.picUrl1 = '/uploads/'+req.files[0].filename;       
+    upevent.picUrl2 = '/uploads/'+req.files[1].filename;       
+    upevent.picUrl3 = '/uploads/'+req.files[2].filename;
+    upevent.save(function (err) {
+        if(err) {
+            console.error('ERROR!');
+        }
+
+    res.redirect('/profile/admin');  
+    });       
+  });
+
+});
 
 module.exports = router;

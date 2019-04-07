@@ -26,18 +26,19 @@ router.get("/", function(req, res){
   cutoff.setDate(cutoff.getDate()+10);
   Upcoming_event.find({date: { "$lt": cutoff, "$gt": today}},function(err, up_events){
     Event.find({},function(error, events){
-      Project.find({},function(errorror, projects){ 
-      console.log(projects);       
+      Project.find({},function(errorror, projects){      
         res.render('index',{up_events: up_events, events: events, projects: projects});
       });
     });
   });
 });
 
-router.get("/event/:event_name/", function(req, res){
+router.get("/event/:event_name/", function(req, res){  
+  var today = new Date();
+  today.setDate(today.getDate()+0);
   Event.findOne({name: req.params.event_name}, function(err, event){
-    Upcoming_event.find({ name: req.params.event_name},
-    ['name', 'picUrl', 'date'],
+    Upcoming_event.find({ name: req.params.event_name, date: { "$lt": today}},
+    ['name', 'picUrl', 'date','picUrl1','picUrl2','picUrl3','fblink'],
     {
       skip:0,
       sort:{
@@ -45,7 +46,6 @@ router.get("/event/:event_name/", function(req, res){
       }
     },
     function(error, events){
-    console.log(events);
       res.render("event", {event: event, events: events});
     });
   });

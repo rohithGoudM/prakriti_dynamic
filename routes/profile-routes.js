@@ -9,6 +9,7 @@ var Team = require("../models/team-model");
 var Customer = require("../models/customer-model");
 var Restaurant = require("../models/restaurant-model");
 var Menu_item = require("../models/menu-model");
+var Upcoming_event = require("../models/upcoming_event-model");
 
 const authCheck = (req, res, next)=>{
 	if(req.user){
@@ -18,13 +19,16 @@ const authCheck = (req, res, next)=>{
 	}else{
 		//not logged in
 		// console.log('not logged in');
-		console.log(req);
 		res.redirect('/');
 	}
 };
 
 router.get('/admin',authCheck,function(req,res){
-	res.render('admin/profile');
+  var today = new Date();
+  today.setDate(today.getDate()+0);
+	Upcoming_event.find({date: { "$lt": today}},function(err, upevents){
+		res.render('admin/profile',{events: upevents});
+	});
 });
 
 
