@@ -129,10 +129,10 @@ router.post('/addupevent', upload.any(), (req, res)=>{
       writeup: req.body.writeup
     }
     new Upcoming_event(newEvent).save(function(err, evnt){
+    res.redirect('/admin/upcoming_events');
     });
 
     });
-    res.redirect('/profile/admin');
 });
 
 router.post('/addevent', upload.any(), (req, res)=>{
@@ -143,24 +143,24 @@ router.post('/addevent', upload.any(), (req, res)=>{
       writeup: req.body.writeup
     }
     new Event(newEvent).save(function(err, evnt){
+    res.redirect('/admin/events');
     });
 
     });
-    res.redirect('/profile/admin');
 });
 
 router.post('/addproject', upload.any(), (req, res)=>{
     req.files.forEach(function(file){
     var newProject = {      
-      name: req.body.event_name,
+      name: req.body.project_name,
       picUrl: '/uploads/'+file.filename,
       writeup: req.body.writeup
     }
     new Project(newProject).save(function(err, evnt){
+    res.redirect('/admin/projects');
     });
 
     });
-    res.redirect('/profile/admin');
 });
 
 router.post('/add_details/:date',upload.any(), function(req, res){
@@ -173,8 +173,8 @@ router.post('/add_details/:date',upload.any(), function(req, res){
         if(err) {
             console.error('ERROR!');
         }
-
-    res.redirect('/profile/admin');  
+    res.redirect('/profile/admin'); 
+ 
     });       
   });
 
