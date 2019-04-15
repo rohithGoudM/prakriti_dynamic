@@ -62,6 +62,11 @@ app.use(function(req, res, next){
    next();
 });
 
+app.use(function(req, res, next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
+
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
